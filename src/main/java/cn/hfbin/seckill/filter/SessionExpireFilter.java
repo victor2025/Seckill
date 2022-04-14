@@ -1,10 +1,9 @@
 package cn.hfbin.seckill.filter;
-import cn.hfbin.seckill.common.Const;
+import cn.hfbin.seckill.common.param.Const;
 import cn.hfbin.seckill.entity.User;
-import cn.hfbin.seckill.redis.RedisService;
-import cn.hfbin.seckill.redis.UserKey;
-import cn.hfbin.seckill.util.CookieUtil;
-import cn.hfbin.seckill.util.JsonUtil;
+import cn.hfbin.seckill.config.redis.RedisService;
+import cn.hfbin.seckill.config.redis.UserKey;
+import cn.hfbin.seckill.common.util.CookieUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

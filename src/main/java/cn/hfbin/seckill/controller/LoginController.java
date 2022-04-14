@@ -1,16 +1,13 @@
 package cn.hfbin.seckill.controller;
 
-import cn.hfbin.seckill.common.Const;
+import cn.hfbin.seckill.common.param.Const;
 import cn.hfbin.seckill.entity.User;
-import cn.hfbin.seckill.exception.HfbinException;
-import cn.hfbin.seckill.param.LoginParam;
-import cn.hfbin.seckill.redis.RedisService;
-import cn.hfbin.seckill.redis.UserKey;
-import cn.hfbin.seckill.result.CodeMsg;
-import cn.hfbin.seckill.result.Result;
+import cn.hfbin.seckill.common.param.LoginParam;
+import cn.hfbin.seckill.config.redis.RedisService;
+import cn.hfbin.seckill.config.redis.UserKey;
+import cn.hfbin.seckill.common.result.Result;
 import cn.hfbin.seckill.service.UserService;
-import cn.hfbin.seckill.util.CookieUtil;
-import cn.hfbin.seckill.util.JsonUtil;
+import cn.hfbin.seckill.common.util.CookieUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

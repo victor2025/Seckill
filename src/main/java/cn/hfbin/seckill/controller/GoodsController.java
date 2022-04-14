@@ -1,16 +1,16 @@
 package cn.hfbin.seckill.controller;
 
-import cn.hfbin.seckill.bo.GoodsBo;
-import cn.hfbin.seckill.common.Const;
+import cn.hfbin.seckill.entity.bo.GoodsBo;
+import cn.hfbin.seckill.common.param.Const;
 import cn.hfbin.seckill.entity.User;
-import cn.hfbin.seckill.redis.GoodsKey;
-import cn.hfbin.seckill.redis.RedisService;
-import cn.hfbin.seckill.redis.UserKey;
-import cn.hfbin.seckill.result.CodeMsg;
-import cn.hfbin.seckill.result.Result;
+import cn.hfbin.seckill.config.redis.GoodsKey;
+import cn.hfbin.seckill.config.redis.RedisService;
+import cn.hfbin.seckill.config.redis.UserKey;
+import cn.hfbin.seckill.common.result.CodeMsg;
+import cn.hfbin.seckill.common.result.Result;
 import cn.hfbin.seckill.service.SeckillGoodsService;
-import cn.hfbin.seckill.util.CookieUtil;
-import cn.hfbin.seckill.vo.GoodsDetailVo;
+import cn.hfbin.seckill.common.util.CookieUtil;
+import cn.hfbin.seckill.entity.vo.GoodsDetailVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;

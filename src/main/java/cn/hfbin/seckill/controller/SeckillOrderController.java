@@ -1,17 +1,16 @@
 package cn.hfbin.seckill.controller;
 
-import cn.hfbin.seckill.bo.GoodsBo;
+import cn.hfbin.seckill.entity.bo.GoodsBo;
 import cn.hfbin.seckill.entity.OrderInfo;
-import cn.hfbin.seckill.entity.SeckillOrder;
 import cn.hfbin.seckill.entity.User;
-import cn.hfbin.seckill.redis.RedisService;
-import cn.hfbin.seckill.redis.UserKey;
-import cn.hfbin.seckill.result.CodeMsg;
-import cn.hfbin.seckill.result.Result;
+import cn.hfbin.seckill.config.redis.RedisService;
+import cn.hfbin.seckill.config.redis.UserKey;
+import cn.hfbin.seckill.common.result.CodeMsg;
+import cn.hfbin.seckill.common.result.Result;
 import cn.hfbin.seckill.service.SeckillGoodsService;
 import cn.hfbin.seckill.service.SeckillOrderService;
-import cn.hfbin.seckill.util.CookieUtil;
-import cn.hfbin.seckill.vo.OrderDetailVo;
+import cn.hfbin.seckill.common.util.CookieUtil;
+import cn.hfbin.seckill.entity.vo.OrderDetailVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

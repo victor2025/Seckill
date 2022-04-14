@@ -1,7 +1,7 @@
 package cn.hfbin.seckill.exception;
 
 
-import cn.hfbin.seckill.result.CodeMsg;
+import cn.hfbin.seckill.common.result.CodeMsg;
 
 public class HfbinException extends RuntimeException{
 

@@ -1,8 +1,8 @@
 package cn.hfbin.seckill.service;
 
 import cn.hfbin.seckill.entity.User;
-import cn.hfbin.seckill.param.LoginParam;
-import cn.hfbin.seckill.result.Result;
+import cn.hfbin.seckill.common.param.LoginParam;
+import cn.hfbin.seckill.common.result.Result;
 
 /**
  * My Blog : www.hfbin.cn

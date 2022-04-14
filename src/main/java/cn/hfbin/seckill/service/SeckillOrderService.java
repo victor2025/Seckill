@@ -1,6 +1,6 @@
 package cn.hfbin.seckill.service;
 
-import cn.hfbin.seckill.bo.GoodsBo;
+import cn.hfbin.seckill.entity.bo.GoodsBo;
 import cn.hfbin.seckill.entity.OrderInfo;
 import cn.hfbin.seckill.entity.SeckillOrder;
 import cn.hfbin.seckill.entity.User;

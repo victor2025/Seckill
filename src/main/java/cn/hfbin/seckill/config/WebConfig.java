@@ -13,6 +13,8 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.servlet.Filter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by: HuangFuBin
@@ -30,7 +32,14 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         // excludePathPatterns 用户排除拦截
         // 映射为 user 的控制器下的所有映射
         //registry.addInterceptor(authorityInterceptor).addPathPatterns("/user/login").excludePathPatterns("/index", "/");
-        registry.addInterceptor(authorityInterceptor);
+        List<String> urls = new ArrayList<>();
+        urls.add("/swagger-resources/**");
+        urls.add("/webjars/**");
+        urls.add("/v2/**");
+        urls.add("/doc.html");
+        urls.add("**/swagger-ui.html");
+        urls.add("/swagger-ui.html/**");
+        registry.addInterceptor(authorityInterceptor).addPathPatterns("/**").excludePathPatterns(urls.toArray(new String[0]));
         super.addInterceptors(registry);
     }
 
