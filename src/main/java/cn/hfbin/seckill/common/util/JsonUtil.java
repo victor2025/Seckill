@@ -1,5 +1,6 @@
 package cn.hfbin.seckill.common.util;
 
+import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jackson.map.DeserializationConfig;
@@ -139,9 +140,55 @@ public class JsonUtil {
             return null;
         }
     }
-    public static void main(String[] args) {
 
 
+    /**
+     * bean 转 String
+     *
+     * @param value
+     * @param <T>
+     * @return
+     */
+    public static <T> String beanToString(T value) {
+        if (value == null) {
+            return null;
+        }
+        Class<?> clazz = value.getClass();
+        if (clazz == int.class || clazz == Integer.class) {
+            return "" + value;
+        } else if (clazz == String.class) {
+            return (String) value;
+        } else if (clazz == long.class || clazz == Long.class) {
+            return "" + value;
+        } else {
+            return JSON.toJSONString(value);
+        }
     }
+
+
+    /**
+     * string转bean
+     *
+     * @param str
+     * @param clazz
+     * @param <T>
+     * @return
+     */
+    public static <T> T stringToBean(String str, Class<T> clazz) {
+        if (str == null || str.length() <= 0 || clazz == null) {
+            return null;
+        }
+        if (clazz == int.class || clazz == Integer.class) {
+            return (T) Integer.valueOf(str);
+        } else if (clazz == String.class) {
+            return (T) str;
+        } else if (clazz == long.class || clazz == Long.class) {
+            return (T) Long.valueOf(str);
+        } else {
+            return JSON.toJavaObject(JSON.parseObject(str), clazz);
+        }
+    }
+
+
 
 }

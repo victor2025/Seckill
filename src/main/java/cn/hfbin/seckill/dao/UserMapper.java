@@ -1,6 +1,7 @@
 package cn.hfbin.seckill.dao;
 
 import cn.hfbin.seckill.entity.User;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -11,6 +12,7 @@ import org.apache.ibatis.annotations.Param;
  * Time: 11:29
  * Such description:
  */
+@Mapper
 public interface UserMapper {
 
     User selectByPhoneAndPassword(@Param("phone") String phone , @Param("password") String password);

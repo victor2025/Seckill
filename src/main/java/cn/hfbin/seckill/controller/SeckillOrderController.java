@@ -3,7 +3,6 @@ package cn.hfbin.seckill.controller;
 import cn.hfbin.seckill.entity.bo.GoodsBo;
 import cn.hfbin.seckill.entity.OrderInfo;
 import cn.hfbin.seckill.entity.User;
-import cn.hfbin.seckill.config.redis.RedisService;
 import cn.hfbin.seckill.config.redis.UserKey;
 import cn.hfbin.seckill.common.result.CodeMsg;
 import cn.hfbin.seckill.common.result.Result;
@@ -11,9 +10,11 @@ import cn.hfbin.seckill.service.SeckillGoodsService;
 import cn.hfbin.seckill.service.SeckillOrderService;
 import cn.hfbin.seckill.common.util.CookieUtil;
 import cn.hfbin.seckill.entity.vo.OrderDetailVo;
+import cn.hfbin.seckill.service.impl.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 @RequestMapping("/order")
+@ResponseBody
 public class SeckillOrderController {
     @Autowired
     RedisService redisService;
@@ -36,8 +38,7 @@ public class SeckillOrderController {
     @Autowired
     SeckillGoodsService seckillGoodsService;
 
-    @RequestMapping("/detail")
-    @ResponseBody
+    @GetMapping("/detail")
     public Result<OrderDetailVo> info(Model model,
                                       @RequestParam("orderId") long orderId , HttpServletRequest request) {
         String loginToken = CookieUtil.readLoginToken(request);

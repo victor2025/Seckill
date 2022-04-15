@@ -1,7 +1,9 @@
 package cn.hfbin.seckill.dao;
 
 import cn.hfbin.seckill.entity.SeckillGoods;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface SeckillGoodsMapper {
     int deleteByPrimaryKey(Long id);
 

@@ -1,9 +1,9 @@
 package cn.hfbin.seckill.filter;
 import cn.hfbin.seckill.common.param.Const;
 import cn.hfbin.seckill.entity.User;
-import cn.hfbin.seckill.config.redis.RedisService;
 import cn.hfbin.seckill.config.redis.UserKey;
 import cn.hfbin.seckill.common.util.CookieUtil;
+import cn.hfbin.seckill.service.impl.RedisService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -36,7 +36,7 @@ public class SessionExpireFilter implements Filter {
             User user = redisService.get(UserKey.getByName,loginToken, User.class);
             if(user != null){
                 //如果user不为空，则重置session的时间，即调用expire命令
-                redisService.expice(UserKey.getByName , loginToken, Const.RedisCacheExtime.REDIS_SESSION_EXTIME);
+                redisService.expire(UserKey.getByName , loginToken, Const.RedisCacheExtime.REDIS_SESSION_EXTIME);
             }
         }
         filterChain.doFilter(servletRequest,servletResponse);

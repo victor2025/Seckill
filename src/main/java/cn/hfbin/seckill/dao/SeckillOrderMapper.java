@@ -1,8 +1,10 @@
 package cn.hfbin.seckill.dao;
 
 import cn.hfbin.seckill.entity.SeckillOrder;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface SeckillOrderMapper {
     int deleteByPrimaryKey(Long id);
 

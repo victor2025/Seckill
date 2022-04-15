@@ -1,0 +1,70 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: seckill-service
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://${host_address}:3306/seckill?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+      username: victor2022
+      password: 1045899571
+  thymeleaf:
+    cache: false
+    enabled: true
+    encoding: utf-8
+    mode: HTML5
+    prefix: classpath:/templates/
+    suffix: .html
+    check-template-location: true
+    check-template: false
+  redis:
+    host: ${host_address}
+    port: 6379
+    database: 0
+    timeout: 1800
+    pool:
+      max-active: 20
+      # 最大阻塞等待时间（-1表示无限制）
+      max-wait: -1
+      max-idle: 5
+      min-idle: 0
+  resources:
+    add-mappings: true
+    cache-period: 3600
+    chain:
+      cache: true
+      enabled: true
+      html-application-cache: true
+      gzipped: true
+    static-locations: classpath:/static/
+  rabbitmq:
+    host: ${host_address}
+    port: 5672
+    username: victor2022
+    password: 1045899571
+    virtual-host: /
+    listener:
+      simple:
+        concurrency: 10
+        max-concurrency: 10
+        prefetch: 1
+        auto-startup: true
+        default-requeue-rejected: true
+    template:
+      retry:
+        enabled: true
+        initial-interval: 1000
+        max-attempts: 3
+        max-interval: 10000
+        multiplier: 1.0
+
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mappers/*.xml
+
+
+# 自定义
+host_address: www.kaikaiclub.site
+

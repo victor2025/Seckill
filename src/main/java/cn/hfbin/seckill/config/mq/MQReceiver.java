@@ -1,12 +1,13 @@
 package cn.hfbin.seckill.config.mq;
 
+import cn.hfbin.seckill.common.util.JsonUtil;
 import cn.hfbin.seckill.entity.bo.GoodsBo;
 import cn.hfbin.seckill.entity.SeckillOrder;
 import cn.hfbin.seckill.entity.User;
-import cn.hfbin.seckill.config.redis.RedisService;
 import cn.hfbin.seckill.service.OrderService;
 import cn.hfbin.seckill.service.SeckillGoodsService;
 import cn.hfbin.seckill.service.SeckillOrderService;
+import cn.hfbin.seckill.service.impl.RedisService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -33,7 +34,7 @@ public class MQReceiver {
 		@RabbitListener(queues=MQConfig.MIAOSHA_QUEUE)
 		public void receive(String message) {
 			log.info("receive message:"+message);
-			SeckillMessage mm  = RedisService.stringToBean(message, SeckillMessage.class);
+			SeckillMessage mm  = JsonUtil.stringToBean(message, SeckillMessage.class);
 			User user = mm.getUser();
 			long goodsId = mm.getGoodsId();
 			

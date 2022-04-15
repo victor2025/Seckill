@@ -1,6 +1,7 @@
 package cn.hfbin.seckill.config.mq;
 
-import cn.hfbin.seckill.config.redis.RedisService;
+import cn.hfbin.seckill.common.util.JsonUtil;
+import cn.hfbin.seckill.service.impl.RedisService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.AmqpTemplate;
@@ -17,7 +18,7 @@ public class MQSender {
 	AmqpTemplate amqpTemplate ;
 	
 	public void sendSeckillMessage(SeckillMessage mm) {
-		String msg = RedisService.beanToString(mm);
+		String msg = JsonUtil.beanToString(mm);
 		log.info("send message:"+msg);
 		amqpTemplate.convertAndSend(MQConfig.MIAOSHA_QUEUE, msg);
 	}

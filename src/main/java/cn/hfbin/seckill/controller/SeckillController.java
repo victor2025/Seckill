@@ -9,7 +9,7 @@ import cn.hfbin.seckill.entity.User;
 import cn.hfbin.seckill.config.mq.MQSender;
 import cn.hfbin.seckill.config.mq.SeckillMessage;
 import cn.hfbin.seckill.config.redis.GoodsKey;
-import cn.hfbin.seckill.config.redis.RedisService;
+import cn.hfbin.seckill.service.impl.RedisService;
 import cn.hfbin.seckill.config.redis.UserKey;
 import cn.hfbin.seckill.common.result.CodeMsg;
 import cn.hfbin.seckill.common.result.Result;
@@ -65,7 +65,7 @@ public class SeckillController implements InitializingBean {
         }
     }
 
-    @RequestMapping("/seckill2")
+    @PostMapping("/seckill2")
     public String list2(Model model,
                         @RequestParam("goodsId") long goodsId, HttpServletRequest request) {
 
@@ -95,8 +95,7 @@ public class SeckillController implements InitializingBean {
         return "order_detail";
     }
 
-    @RequestMapping(value = "/{path}/seckill", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/{path}/seckill")
     public Result<Integer> list(Model model,
                                 @RequestParam("goodsId") long goodsId,
                                 @PathVariable("path") String path,
@@ -159,8 +158,7 @@ public class SeckillController implements InitializingBean {
      * -1：秒杀失败
      * 0： 排队中
      */
-    @RequestMapping(value = "/result", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping(value = "/result")
     public Result<Long> miaoshaResult(@RequestParam("goodsId") long goodsId, HttpServletRequest request) {
         String loginToken = CookieUtil.readLoginToken(request);
         User user = redisService.get(UserKey.getByName, loginToken, User.class);
@@ -171,8 +169,7 @@ public class SeckillController implements InitializingBean {
         return Result.success(result);
     }
     @AccessLimit(seconds=5, maxCount=5, needLogin=true)
-    @RequestMapping(value = "/path", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping(value = "/path")
     public Result<String> getMiaoshaPath(HttpServletRequest request, User user,
                                          @RequestParam("goodsId") long goodsId) {
         String loginToken = CookieUtil.readLoginToken(request);
