@@ -1,5 +1,7 @@
 package com.victor2022.seckill.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.victor2022.seckill.service.impl.RedisService;
 import com.victor2022.seckill.entity.bo.GoodsBo;
 import com.victor2022.seckill.common.param.Const;
@@ -20,8 +22,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.thymeleaf.spring4.context.SpringWebContext;
-import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+import org.thymeleaf.context.WebContext;
+import org.thymeleaf.spring5.context.webflux.SpringWebFluxContext;
+import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,7 +48,6 @@ public class GoodsController {
     @Autowired
     SeckillGoodsService seckillGoodsService;
 
-
     @Autowired
     ThymeleafViewResolver thymeleafViewResolver;
 
@@ -66,10 +68,11 @@ public class GoodsController {
         List<GoodsBo> goodsList = seckillGoodsService.getSeckillGoodsList();
         model.addAttribute("goodsList", goodsList);
 //        WebContext ctx = new WebContext(request, response, request.getServletContext(), request.getLocale(), model.asMap());
-        SpringWebContext ctx = new SpringWebContext(request, response,
-                request.getServletContext(), request.getLocale(), model.asMap(), applicationContext);
-        //手动渲染
-        html = thymeleafViewResolver.getTemplateEngine().process("goods_list", ctx);
+//        SpringWebContext ctx = new SpringWebContext(request, response,
+//                request.getServletContext(), request.getLocale(), model.asMap(), applicationContext);
+//        //手动渲染
+//        html = thymeleafViewResolver.getTemplateEngine().process("goods_list", ctx);
+        html = (String) JSON.toJSON(goodsList);
         if (!StringUtils.isEmpty(html)) {
             redisService.set(GoodsKey.getGoodsList, "", html, Const.RedisCacheExtime.GOODS_LIST);
         }
@@ -111,10 +114,10 @@ public class GoodsController {
             }
             model.addAttribute("seckillStatus", miaoshaStatus);
             model.addAttribute("remainSeconds", remainSeconds);
-            SpringWebContext ctx = new SpringWebContext(request, response,
-                    request.getServletContext(), request.getLocale(), model.asMap(), applicationContext);
-//            WebContext ctx = new WebContext(request, response, request.getServletContext(), request.getLocale(), model.asMap());
 
+//            SpringWebContext ctx = new SpringWebContext(request, response,
+//                    request.getServletContext(), request.getLocale(), model.asMap(), applicationContext);
+            WebContext ctx = new WebContext(request, response, request.getServletContext(), request.getLocale(), model.asMap());
             html = thymeleafViewResolver.getTemplateEngine().process("goods_detail", ctx);
             if (!StringUtils.isEmpty(html)) {
                 redisService.set(GoodsKey.getGoodsDetail, "" + goodsId, html, Const.RedisCacheExtime.GOODS_INFO);

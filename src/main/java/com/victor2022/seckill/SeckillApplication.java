@@ -7,7 +7,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
 @SpringBootApplication
-@MapperScan("cn.hfbin.seckill.dao")
+@MapperScan("com.victor2022.seckill.dao")
 public class SeckillApplication {
 
 	public static void main(String[] args) {

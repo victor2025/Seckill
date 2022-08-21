@@ -1,0 +1,46 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: seckill-service
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://${host_address}:3306/seckill?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+      username: victor2022
+      password: 1045899571
+  redis:
+    host: ${host_address}
+    port: 6380
+    database: 0
+    timeout: 1800
+    pool:
+      max-active: 20
+      # 最大阻塞等待时间（-1表示无限制）
+      max-wait: -1
+      max-idle: 5
+      min-idle: 0
+  rabbitmq:
+    host: ${host_address}
+    port: 5672
+    username: victor2022
+    password: 1045899571
+    virtual-host: /
+    listener:
+      simple:
+        concurrency: 10
+        max-concurrency: 10
+        prefetch: 1
+        auto-startup: true
+        default-requeue-rejected: true
+    template:
+      retry:
+        enabled: true
+        initial-interval: 1000
+        max-attempts: 3
+        max-interval: 10000
+        multiplier: 1.0
+
+host_address: localhost
+
